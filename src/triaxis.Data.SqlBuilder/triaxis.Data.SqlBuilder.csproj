@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+    <PackageId>triaxis.Data.SqlBuilder</PackageId>
+    <Version>1.0.0-dev</Version>
+    <Authors>ssimek</Authors>
+    <Company>triaxis s.r.o.</Company>
+    <Description>Fluent SQL builder</Description>
+    <Copyright>&#169; 2022 triaxis s.r.o.</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/triaxis-oss/triaxis.Data.SqlBuilder</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="triaxis.Reflection.PropertyAccess" Version="1.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational">
+      <Version Condition=" '$(TargetFramework)' == 'net5.0' ">5.0.0</Version>
+      <Version Condition=" '$(TargetFramework)' == 'net6.0' ">6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(IncludeSymbolsInNuget) == 'true'">
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+</Project>
