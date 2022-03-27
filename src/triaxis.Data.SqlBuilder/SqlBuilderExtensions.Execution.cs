@@ -5,6 +5,14 @@ using ContextStates;
 partial class SqlBuilderExtensions
 {
     /// <summary>
+    /// Executes the query and returns the list of mapped entities
+    /// </summary>
+    /// <typeparam name="T">Type of the mapped entities to select</typeparam>
+    /// <param name="context">The <see cref="SqlBuilder" /> context</param>
+    public static Task<List<T>> QueryAsync<T>(this IEntityContext<T> context) where T : new()
+        => context.Builder.ExecuteAsync(new List<T>(), rdr => new SqlMapper<T>(rdr, context.Builder.EntityType).AddToList);
+
+    /// <summary>
     /// Executes the query and returns the first found entity from the generated SQL; throws if no entity is found
     /// </summary>
     /// <typeparam name="T">Type of the mapped entity to select</typeparam>

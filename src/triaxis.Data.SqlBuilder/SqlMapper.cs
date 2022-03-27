@@ -66,4 +66,11 @@ internal class SqlMapper<T>
             _setters[i].Set(record, val);
         }
     }
+
+    public void AddToList(IDataRecord rdr, ref List<T> list)
+    {
+        T record = new();
+        ReadNotNull(rdr, ref record);
+        list.Add(record);
+    }
 }
