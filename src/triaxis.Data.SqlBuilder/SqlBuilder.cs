@@ -1137,8 +1137,7 @@ public partial class SqlBuilder
                 return AppendLiteral(value.ToString());
 
             case TypeCode.DateTime:
-                _sql.AppendFormat(_invar, "{0:yyyy-MM-dd HH:mm:ss}", value.ToDateTime(_invar));
-                return this;
+                return AppendLiteral(value.ToDateTime(_invar).ToString("yyyy-MM-dd HH:mm:ss", _invar));
 
             case TypeCode.DBNull:
                 return AppendSql("NULL");
