@@ -9,6 +9,7 @@
     <Description>Fluent SQL builder</Description>
     <Copyright>&#169; 2022 triaxis s.r.o.</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/triaxis-oss/triaxis.Data.SqlBuilder</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -23,7 +24,12 @@
 
   <ItemGroup>
     <None Include="../../LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    <None Include="$(BaseIntermediateOutputPath)/icon.png" Pack="true" PackagePath="$(PackageIcon)" />
   </ItemGroup>
+
+  <Target Name="DownloadPackageIcon" BeforeTargets="GenerateNuspec">
+    <DownloadFile SourceUrl="https://raw.githubusercontent.com/triaxis-oss/content/main/icon.png" DestinationFolder="$(BaseIntermediateOutputPath)" />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="triaxis.Reflection.PropertyAccess" Version="1.0.1" />
