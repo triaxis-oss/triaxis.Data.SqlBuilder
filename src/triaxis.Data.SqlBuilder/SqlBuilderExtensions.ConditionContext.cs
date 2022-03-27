@@ -29,4 +29,30 @@ partial class SqlBuilderExtensions
         sql.Where(conditionBuilder);
         return new(sql);
     }
+
+    /// <summary>
+    /// Appends a property-mapped column to the ORDER BY clause of the current statement
+    /// </summary>
+    /// <typeparam name="T">The mapped type from which the property is selected</typeparam>
+    /// <param name="context">The <see cref="SqlBuilder" /> context</param>
+    /// <param name="selector">An expression identifying the property</param>
+    public static Context<T, Condition> OrderBy<T>(this IContext<T, Condition> context, Expression<Func<T, object?>> selector)
+    {
+        var sql = context.Builder;
+        sql.OrderBy(selector.GetEntityProperty(sql.Context).GetColumnBaseName());
+        return new(sql);
+    }
+
+    /// <summary>
+    /// Appends a property-mapped column to the ORDER BY clause of the current statement
+    /// </summary>
+    /// <typeparam name="T">The mapped type from which the property is selected</typeparam>
+    /// <param name="context">The <see cref="SqlBuilder" /> context</param>
+    /// <param name="selector">An expression identifying the property</param>
+    public static Context<T, Condition> OrderByDescending<T>(this IContext<T, Condition> context, Expression<Func<T, object?>> selector)
+    {
+        var sql = context.Builder;
+        sql.OrderByDescending(selector.GetEntityProperty(sql.Context).GetColumnBaseName());
+        return new(sql);
+    }
 }
