@@ -733,6 +733,11 @@ public partial class SqlBuilder
     /// <remark>Can be called multiple times for appending multiple columns</remark>
     public SqlBuilder OrderBy(string column, bool descending = false)
     {
+        if (_state == State.Select)
+        {
+            From(_entityType ?? throw new InvalidOperationException());
+        }
+
         if (_state != State.OrderBy)
         {
             _state = State.OrderBy;
