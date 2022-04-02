@@ -180,6 +180,7 @@ public partial class SqlBuilder
 
     internal SqlBuilder Select(IEntityType type)
     {
+        _entityType = type;
         foreach (var prop in type.GetProperties())
             Select(prop.GetColumnBaseName());
         return this;
