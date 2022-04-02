@@ -27,6 +27,14 @@ partial class SqlBuilderExtensions
         => context.Op(null, "=");
 
     /// <summary>
+    /// Checks whether the last specified WHERE column is NOT NULL
+    /// </summary>
+    /// <typeparam name="T">Type of the mapped entity</typeparam>
+    /// <param name="context">The <see cref="SqlBuilder" /> context</param>
+    public static Context<T, Condition> IsNotNull<T>(this IContext<T, Where> context)
+        => context.Op(null, "<>");
+
+    /// <summary>
     /// Checks whether the last specified WHERE column is equal to the specified literal value
     /// </summary>
     /// <typeparam name="T">Type of the mapped entity</typeparam>
@@ -34,6 +42,15 @@ partial class SqlBuilderExtensions
     /// <param name="value">Literal value to compare against</param>
     public static Context<T, Condition> Eq<T>(this IContext<T, Where> context, object? value)
         => context.Op(value, "=");
+
+    /// <summary>
+    /// Checks whether the last specified WHERE column is not equal to the specified literal value
+    /// </summary>
+    /// <typeparam name="T">Type of the mapped entity</typeparam>
+    /// <param name="context">The <see cref="SqlBuilder" /> context</param>
+    /// <param name="value">Literal value to compare against</param>
+    public static Context<T, Condition> Ne<T>(this IContext<T, Where> context, object? value)
+        => context.Op(value, "<>");
 
     /// <summary>
     /// Checks whether the last specified WHERE column is less than the specified literal value

@@ -666,7 +666,7 @@ public partial class SqlBuilder
         switch (value)
         {
             case null:
-                AppendSql(" IS NULL");
+                AppendSql(op == "<>" ? " IS NOT NULL" : " IS NULL");
                 break;
             case string:
                 goto default;
